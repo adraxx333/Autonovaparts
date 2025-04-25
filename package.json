@@ -25,6 +25,7 @@
     },
     "dependencies": {
         "@inertiajs/vue3": "^2.0.0-beta.3",
+        "@mdi/font": "^7.4.47",
         "@tailwindcss/vite": "^4.1.1",
         "@vitejs/plugin-vue": "^5.2.1",
         "@vueuse/core": "^12.8.2",
@@ -35,12 +36,14 @@
         "lucide": "^0.468.0",
         "lucide-vue-next": "^0.468.0",
         "reka-ui": "^2.2.0",
+        "sass": "^1.87.0",
         "tailwind-merge": "^2.5.5",
         "tailwindcss": "^4.1.1",
         "tailwindcss-animate": "^1.0.7",
         "typescript": "^5.2.2",
         "vite": "^6.2.0",
         "vue": "^3.5.13",
+        "vuetify": "^3.3.22",
         "ziggy-js": "^2.4.2"
     },
     "optionalDependencies": {
