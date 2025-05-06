@@ -63,6 +63,7 @@
 
 <script setup>
 import { ref } from 'vue';
+import axios from 'axios';
 
 // DATA
 const imageTitle = ref('/images/autonovaparts_title.jpg');
@@ -80,16 +81,24 @@ const passwordRules = [(v) => !!v || 'La contraseña es requerida', (v) => v?.le
 const handleLogin = async () => {
     try {
         isLoading.value = true;
-        // Simular tiempo de carga
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-
-        console.log('Iniciando sesión...', {
+        
+        const response = await axios.post('/api/login', {
             email: email.value,
             password: password.value,
-            remember: remember.value,
         });
+
+        if (response.data.success) {
+            window.location.href = response.data.redirect;
+        }
     } catch (error) {
-        console.error('Error al iniciar sesión:', error);
+        if (error.response?.data?.errors) {
+            // Manejar errores de validación
+            const errors = error.response.data.errors;
+            if (errors.email) {
+                // Aquí podrías mostrar los errores en la interfaz
+                console.error(errors.email[0]);
+            }
+        }
     } finally {
         isLoading.value = false;
     }
