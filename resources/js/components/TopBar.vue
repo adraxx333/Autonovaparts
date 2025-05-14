@@ -7,9 +7,9 @@
                     :class="{
                         'border-t-4 border-t-blue-400 text-blue-400': valueSelected === 'about',
                     }"
-                    class="flex h-full w-full items-center justify-center transition duration-300 ease-in-out hover:border-t-4 hover:border-t-blue-400 hover:text-blue-400"
+                    class="roboto flex h-full w-full items-center justify-center transition duration-300 ease-in-out hover:border-t-4 hover:border-t-blue-400 hover:text-blue-400"
                 >
-                    <span class="roboto">Conócenos</span>
+                    <span>Conócenos</span>
                 </div>
             </button>
             <button @click="loadServices" class="h-full w-28 text-center">
@@ -17,9 +17,9 @@
                     :class="{
                         'border-t-4 border-t-blue-400 text-blue-400': valueSelected === 'services',
                     }"
-                    class="flex h-full w-full items-center justify-center transition duration-300 ease-in-out hover:border-t-4 hover:border-t-blue-400 hover:text-blue-400"
+                    class="roboto flex h-full w-full items-center justify-center transition duration-300 ease-in-out hover:border-t-4 hover:border-t-blue-400 hover:text-blue-400"
                 >
-                    <span class="roboto">Servicios</span>
+                    <span>Servicios</span>
                 </div>
             </button>
             <button @click="loadItems" class="h-full w-28 text-center">
@@ -27,9 +27,9 @@
                     :class="{
                         'border-t-4 border-t-blue-400 text-blue-400': valueSelected === 'items',
                     }"
-                    class="flex h-full w-full items-center justify-center transition duration-300 ease-in-out hover:border-t-4 hover:border-t-blue-400 hover:text-blue-400"
+                    class="roboto flex h-full w-full items-center justify-center transition duration-300 ease-in-out hover:border-t-4 hover:border-t-blue-400 hover:text-blue-400"
                 >
-                    <span class="roboto">Catálogo</span>
+                    <span>Catálogo</span>
                 </div>
             </button>
             <button @click="loadPerfil" class="h-full w-28 text-center">
@@ -37,9 +37,9 @@
                     :class="{
                         'border-t-4 border-t-blue-400 text-blue-400': valueSelected === 'perfil',
                     }"
-                    class="flex h-full w-full items-center justify-center transition duration-300 ease-in-out hover:border-t-4 hover:border-t-blue-400 hover:text-blue-400"
+                    class="roboto flex h-full w-full items-center justify-center transition duration-300 ease-in-out hover:border-t-4 hover:border-t-blue-400 hover:text-blue-400"
                 >
-                    <span class="roboto">Perfil</span>
+                    <span>Perfil</span>
                 </div>
             </button>
         </div>
@@ -50,7 +50,7 @@
 import { ref } from 'vue';
 const emit = defineEmits(['loadAbout', 'loadServices', 'loadItems', 'loadPerfil']);
 const imageTitle = ref('/images/autonovaparts_title.jpg');
-const valueSelected = ref('');
+const valueSelected = ref('about');
 
 const loadAbout = () => {
     emit('loadAbout');
