@@ -87,7 +87,15 @@
                             <v-alert v-if="error" :text="error" type="error"></v-alert>
                             <!-- Botón -->
                             <div class="flex-none">
-                                <v-btn type="submit" color="primary" block size="large" elevation="2" :loading="isLoading" min-height="44">
+                                <v-btn
+                                    type="submit"
+                                    color="primary"
+                                    block
+                                    size="large"
+                                    elevation="2"
+                                    :loading="applicationUsers.isLoading"
+                                    min-height="44"
+                                >
                                     <v-icon left class="mr-2">mdi-login</v-icon>
                                     {{ isLogin ? 'Iniciar Sesión' : 'Registarse' }}
                                 </v-btn>
@@ -101,8 +109,8 @@
 </template>
 
 <script setup>
-import axios from 'axios';
 import { ref } from 'vue';
+import { useApplicationUsersStore } from '@/store/applicationUsers';
 
 // DATA
 const imageTitle = ref('/images/autonovaparts_title.jpg');
@@ -113,8 +121,8 @@ const password = ref('');
 const confirmPassword = ref('');
 const showPassword = ref(false);
 const showConfirmPassword = ref('');
-const isLoading = ref(false);
-const isLogin = ref(false);
+const isLogin = ref(true);
+const applicationUsers = useApplicationUsersStore();
 
 // Refs para los campos de Vuetify
 const emailInput = ref(null);
@@ -133,30 +141,25 @@ const confirmPasswordRules = [
 
 const handleLogin = async () => {
     try {
-        isLoading.value = true;
-        const data = isLogin.value
-            ? {
-                  url: '/api/login',
-                  formData: {
-                      email: email.value,
-                      password: password.value,
-                  },
-              }
-            : {
-                  url: '/api/register',
-                  formData: {
-                      name: name.value,
-                      email: email.value,
-                      password: password.value,
-                      password_confirmation: confirmPassword.value,
-                  },
-              };
+        error.value = '';
+        let response;
 
-        const response = await axios.post(data.url, data.formData);
-        console.log(response);
+        if (isLogin.value) {
+            response = await applicationUsers.login({
+                email: email.value,
+                password: password.value,
+            });
+        } else {
+            response = await applicationUsers.register({
+                name: name.value,
+                email: email.value,
+                password: password.value,
+                password_confirmation: confirmPassword.value,
+            });
+        }
+
         if (response.data.success) {
             error.value = '';
-            console.log(response.data.message);
             window.location.href = response.data.redirect;
         }
     } catch (err) {
@@ -164,11 +167,10 @@ const handleLogin = async () => {
             const errors = err.response.data.errors;
             if (errors.error) {
                 error.value = errors.error[0];
-                console.error(error.value);
             }
+        } else {
+            error.value = applicationUsers.error;
         }
-    } finally {
-        isLoading.value = false;
     }
 };
 

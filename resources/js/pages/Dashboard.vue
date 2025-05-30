@@ -1,37 +1,19 @@
 <template>
-    <TopBar @load-about="loadAbout" @load-services="loadServices" @load-items="loadItems" @load-perfil="loadPerfil"></TopBar>
+    <TopBar></TopBar>
 
     <div class="min-h-screen w-full bg-[url('/images/car.jpg')] bg-cover bg-center">
-        <AboutScreen v-if="valueSelected === 'about'"></AboutScreen>
+        <AboutScreen v-if="application.screenSelected === 'about'"></AboutScreen>
+        <ServiceScreen v-if="application.screenSelected === 'service'"></ServiceScreen>
+        <ItemsScreen v-if="application.screenSelected === 'items'"></ItemsScreen>
     </div>
 </template>
 
 <script setup>
 import TopBar from '@/components/TopBar.vue';
-import { ref } from 'vue';
+import { useApplicationStore } from '@/store/application';
 import AboutScreen from './AboutScreen.vue';
-
+import ItemsScreen from './ItemsScreen.vue';
+import ServiceScreen from './ServiceSreen.vue';
 // DATA
-const valueSelected = ref('about');
-
-//METHOD
-const loadAbout = () => {
-    console.log('about');
-    valueSelected.value = 'about';
-};
-
-const loadServices = () => {
-    console.log('service');
-    valueSelected.value = 'service';
-};
-
-const loadItems = () => {
-    console.log('items');
-    valueSelected.value = 'items';
-};
-
-const loadPerfil = () => {
-    console.log('perfil');
-    valueSelected.value = 'perfil';
-};
+const application = useApplicationStore();
 </script>

@@ -56,6 +56,7 @@ class LoginController extends Controller
 
             return response()->json([
                 'success' => true,
+                'user' => $user,
                 'message' => 'Se ha iniciado sesión!',
                 'redirect' => route('dashboard')
             ]);
@@ -106,6 +107,7 @@ class LoginController extends Controller
 
             return response()->json([
                 'success' => true,
+                'user' => $newUser,
                 'message' => 'Usuario registrado correctamente',
                 'redirect' => route('dashboard')
             ], 201);
