@@ -63,11 +63,9 @@
         </div>
     </div>
     <ContactForm v-model="showContactForm" />
-    <FooterBar />
 </template>
 
 <script setup>
-import FooterBar from '@/components/FooterBar.vue';
 import ContactForm from '@/components/ContactForm.vue';
 import { ref } from 'vue';
 

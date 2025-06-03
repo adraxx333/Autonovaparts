@@ -1,34 +1,65 @@
 import { defineStore } from 'pinia';
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 
 export const useApplicationStore = defineStore('application', () => {
     const screenSelected = ref('about');
+    const currentComponent = ref('AboutScreen');
+    const previousScreen = ref(null);
+
+    // Computed para verificar si estamos en una pantalla protegida
+    const isProtectedScreen = computed(() => {
+        return ['orders', 'favorites', 'settings'].includes(screenSelected.value);
+    });
+
+    // Función para navegar a una pantalla
+    const navigateTo = (screen) => {
+        previousScreen.value = screenSelected.value;
+        screenSelected.value = screen;
+    };
 
     const loadAbout = () => {
-        console.log('about');
-        screenSelected.value = 'about';
+        navigateTo('about');
+        currentComponent.value = 'AboutScreen';
     };
 
     const loadServices = () => {
-        console.log('service');
-        screenSelected.value = 'service';
+        navigateTo('service');
+        currentComponent.value = 'ServicesScreen';
     };
 
     const loadItems = () => {
-        console.log('items');
-        screenSelected.value = 'items';
+        navigateTo('items');
+        currentComponent.value = 'ItemsScreen';
     };
 
-    const loadPerfil = () => {
-        console.log('perfil');
-        screenSelected.value = 'perfil';
+    const loadLogin = () => {
+        navigateTo('login');
+        currentComponent.value = 'LoginScreen';
+    };
+
+    const loadOrders = () => {
+        navigateTo('orders');
+        currentComponent.value = 'OrdersScreen';
+    };
+
+    // Función para volver a la pantalla anterior
+    const goBack = () => {
+        if (previousScreen.value) {
+            navigateTo(previousScreen.value);
+        }
     };
 
     return {
         screenSelected,
+        currentComponent,
+        previousScreen,
+        isProtectedScreen,
+        navigateTo,
         loadAbout,
         loadServices,
         loadItems,
-        loadPerfil,
+        loadLogin,
+        loadOrders,
+        goBack,
     };
 });

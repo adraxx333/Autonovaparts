@@ -31,13 +31,10 @@
         </div>
         <HistoryLine></HistoryLine>
     </div>
-
-    <FooterBar></FooterBar>
 </template>
 
 <script setup>
 import CarouselImages from '@/components/CarouselImages.vue';
-import FooterBar from '@/components/FooterBar.vue';
 import HistoryLine from '@/components/HistoryLine.vue';
 import { computed } from 'vue';
 //COMPUTED

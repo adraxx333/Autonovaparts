@@ -10,6 +10,8 @@ class Message extends Model
 {
     use HasFactory;
 
+    protected $table = 'messages';
+
     /**
      * Indicates if the model's ID is auto-incrementing.
      *
