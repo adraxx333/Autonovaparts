@@ -19,6 +19,8 @@ class PartController extends Controller
                 'stock',
                 'image_url',
                 'is_active',
+                'created_at',
+                'updated_at',
                 'category_id'
             ])
             ->get();
