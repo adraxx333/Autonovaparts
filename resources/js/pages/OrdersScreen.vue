@@ -65,7 +65,7 @@
                             <div class="space-y-4">
                                 <div class="flex items-center justify-between">
                                     <span class="text-gray-600">Total:</span>
-                                    <span class="font-semibold text-gray-800">${{ Number(order.total).toFixed(2) }}</span>
+                                    <span class="font-semibold text-gray-800">{{ formatPrice(order.total) }}</span>
                                 </div>
                                 <div class="flex items-center justify-between">
                                     <span class="text-gray-600">Items:</span>
@@ -99,8 +99,8 @@
                                     <td class="px-12 py-8">{{ item.part.name }}</td>
                                     <td class="px-12 py-8">{{ item.part.code }}</td>
                                     <td class="px-12 py-8 text-center">{{ item.quantity }}</td>
-                                    <td class="px-12 py-8 text-right">${{ Number(item.price).toFixed(2) }}</td>
-                                    <td class="px-12 py-8 text-right font-semibold">${{ Number(item.subtotal).toFixed(2) }}</td>
+                                    <td class="px-12 py-8 text-right">{{ formatPrice(item.price) }}</td>
+                                    <td class="px-12 py-8 text-right font-semibold">{{ formatPrice(item.subtotal) }}</td>
                                 </tr>
                             </tbody>
                         </v-table>
@@ -240,6 +240,14 @@ const formatDate = (date) => {
         console.error('Error al formatear fecha:', error);
         return 'Error en fecha';
     }
+};
+
+// Función para formatear el precio
+const formatPrice = (price) => {
+    return new Intl.NumberFormat('es-ES', {
+        style: 'currency',
+        currency: 'EUR',
+    }).format(price);
 };
 
 // Función para obtener el color del estado
